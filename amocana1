@@ -1,0 +1,61 @@
+import datetime as dt
+
+class Plant:
+  def __init__(self, flower_name, bloom_time):
+    self.flower_name = flower_name
+    self.bloom_time = bloom_time
+
+  def info(self):
+    print("This is a '{}' very beautifull one and it blooms in {}".format(self.flower_name, self.bloom_time))
+
+  def __watering(self):
+    if self.bloom_time.lower() == 'spring':
+      print("you have to water plant twice a day")
+    elif self.bloom_time.lower() == 'summer':
+      print("you have to water plant thrice a day")
+    elif self.bloom_time.lower() == 'autumn':
+      print("you have to water plant once a day")
+    elif self.bloom_time.lower() == 'winter':
+      print("you don't have to water plant")
+
+class Apple(Plant):
+  def __init__(self, flower_name, bloom_time, plant_color):
+    Plant.__init__(self, flower_name, bloom_time)
+    self.color = plant_color
+
+  def __add__(self, other):
+    if self.color.lower() == 'red' and other.lower() == 'yellow' or self.color.lower() == 'yellow' and other.lower() == 'red':
+      print('New type of apple will be Orange')
+    elif self.color.lower() == 'green' and other.lower() == 'yellow' or self.color.lower() == 'yellow' and other.lower() == 'green':
+        print('New type of apple will be Yellowish Green')
+    elif self.color.lower() == 'green' and other.lower() == 'red' or self.color.lower() == 'red' and other.lower() == 'green':
+        print('New type of apple will be Brown')
+    else:
+        print("Those species aren't mixable")
+
+class Potato(Plant):
+  def __init__(self, flower_name, bloom_time, shelf_time):
+    Plant.__init__(self, flower_name, bloom_time)
+    self.valid = shelf_time
+
+  def validPotato(self, date):
+    if self.valid >= 30:
+      print('produc is outdated')
+    else:
+      print("product is still usable till {}".format(date))
+    
+
+apple1 = Apple('kekhura', 'summer', 'red')
+apple2 = Apple('panda', 'spring', 'yellow')
+potato = Potato('Potato flower', 'summer', 23)
+
+
+apple1.info()
+apple2.info()
+
+apple1._Plant__watering()
+apple2._Plant__watering()
+apple1.__add__(apple2.color)
+
+
+potato.validPotato(dt.date.today().day + (30 - potato.valid))
