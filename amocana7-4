@@ -1,0 +1,17 @@
+import requests
+import json
+
+wasakitxi = requests.get("https://www.myhome.ge/ka/search?Page=2&Ajax=1")
+wakitxuli = json.loads(wasakitxi.content)
+produqtebi = wakitxuli['Data']['Prs']
+
+products = ""
+
+for i in produqtebi:
+    if i.get('price') != '0' and i.get('map_lat') != '0' and i.get('map_lon') != '0':
+        for key, value in i.items():
+            products += "{}: {}\n".format(key, value)
+
+print(products)
+
+
