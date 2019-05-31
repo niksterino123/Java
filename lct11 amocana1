@@ -1,0 +1,34 @@
+from tkinter import *
+import random as rd
+import time
+raw = rd.randrange(1,25)
+print(raw)
+
+def check():
+    count = 0
+    while count != 5:
+        if raw != window.get():
+            err.insert(0, "error")
+        if err.get() == "error":
+            main.destroy()
+            mainloop()
+
+    count += 1
+
+main = Tk()
+
+Label(main, text = "Enter Number: ").grid(row = 0)
+
+
+
+window = Entry(main)
+err = Entry(main)
+
+window.grid(row = 0, column = 1)
+err.grid(row = 1, column = 1)
+
+
+Button(main, text = "Enter", command = check).grid(row = 2, column = 1)
+
+mainloop()
+
