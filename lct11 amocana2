@@ -1,0 +1,176 @@
+from tkinter import *
+
+def calculate():
+    point_1 = 0
+    point_2 = 0
+    point_3 = 0
+    point_4 = 0
+    point_5 = 0
+    point_6 = 0
+    if int(Entry_1.get()) >= 91 and int(Entry_1.get()) <= 100:
+        point_1 = 5
+    elif int(Entry_1.get()) >= 81 and int(Entry_1.get()) <= 90:
+        point_1 = 4
+    elif int(Entry_1.get()) >= 71 and int(Entry_1.get()) <= 80:
+        point_1 = 3
+    elif int(Entry_1.get()) >= 61 and int(Entry_1.get()) <= 90:
+        point_1 = 2
+    elif int(Entry_1.get()) >= 51 and int(Entry_1.get()) <= 60:
+        point_1 = 1
+    elif int(Entry_1.get()) < 40:
+        point_1 = 0
+
+
+    if int(Entry_2.get()) >= 91 and int(Entry_2.get()) <= 100:
+        point_2 = 5
+    elif int(Entry_2.get()) >= 81 and int(Entry_2.get()) <= 90:
+        point_2 = 4
+    elif int(Entry_2.get()) >= 71 and int(Entry_2.get()) <= 80:
+        point_2 = 3
+    elif int(Entry_2.get()) >= 61 and int(Entry_2.get()) <= 90:
+        point_2 = 2
+    elif int(Entry_2.get()) >= 51 and int(Entry_2.get()) <= 60:
+        point_2 = 1
+    elif int(Entry_2.get()) < 40:
+        point_2 = 0
+
+
+    if int(Entry_3.get()) >= 91 and int(Entry_3.get()) <= 100:
+        point_3 = 5
+    elif int(Entry_3.get()) >= 81 and int(Entry_3.get()) <= 90:
+        point_3 = 4
+    elif int(Entry_3.get()) >= 71 and int(Entry_3.get()) <= 80:
+        point_3 = 3
+    elif int(Entry_3.get()) >= 61 and int(Entry_3.get()) <= 90:
+        point_3 = 2
+    elif int(Entry_3.get()) >= 51 and int(Entry_3.get()) <= 60:
+        point_3 = 1
+    elif int(Entry_3.get()) < 40:
+        point_3 = 0
+    4
+
+    if int(Entry_4.get()) >= 91 and int(Entry_4.get()) <= 100:
+        point_4 = 5
+    elif int(Entry_4.get()) >= 81 and int(Entry_4.get()) <= 90:
+        point_4 = 4
+    elif int(Entry_4.get()) >= 71 and int(Entry_4.get()) <= 80:
+        point_4 = 3
+    elif int(Entry_4.get()) >= 61 and int(Entry_4.get()) <= 90:
+        point_4 = 2
+    elif int(Entry_4.get()) >= 51 and int(Entry_4.get()) <= 60:
+        point_4 = 1
+    elif int(Entry_4.get()) < 40:
+        point_4 = 0
+
+
+    if int(Entry_5.get()) >= 91 and int(Entry_5.get()) <= 100:
+        point_5 = 5
+    elif int(Entry_5.get()) >= 81 and int(Entry_5.get()) <= 90:
+        point_5 = 4
+    elif int(Entry_5.get()) >= 71 and int(Entry_5.get()) <= 80:
+        point_5 = 3
+    elif int(Entry_5.get()) >= 61 and int(Entry_5.get()) <= 90:
+        point_5 = 2
+    elif int(Entry_5.get()) >= 51 and int(Entry_5.get()) <= 60:
+        point_5 = 1
+    elif int(Entry_5.get()) < 40:
+        point_5 = 0
+
+
+    if int(Entry_6.get()) >= 91 and int(Entry_6.get()) <= 100:
+        point_6 = 5
+    elif int(Entry_6.get()) >= 81 and int(Entry_6.get()) <= 90:
+        point_6 = 4
+    elif int(Entry_6.get()) >= 71 and int(Entry_6.get()) <= 80:
+        point_6 = 3
+    elif int(Entry_6.get()) >= 61 and int(Entry_6.get()) <= 90:
+        point_6 = 2
+    elif int(Entry_6.get()) >= 51 and int(Entry_6.get()) <= 60:
+        point_6 = 1
+    elif int(Entry_6.get()) < 40:
+        point_6 = 0
+
+    answer = ((point_1 * int(credits_1.get())) + (point_2 * int(credits_2.get())) + (point_3 * int(credits_3.get())) +
+              (point_4 * int(credits_4.get())) + (point_5 * int(credits_5.get())) + (point_6 * int(credits_6.get()))) / (
+            int(credits_1.get()) + int(credits_1.get()) + int(credits_1.get()) + int(credits_1.get()) + int(credits_1.get()) + int(credits_1.get())
+    )
+
+    gpa_window.insert(0, answer)
+
+main = Tk()
+
+main.title("GPA Calculator")
+
+Label(main, text = "Subject_1: ").grid(row = 0, column = 0)
+Label(main, text = "Subject_2: ").grid(row = 1, column = 0)
+Label(main, text = "Subject_3: ").grid(row = 2, column = 0)
+Label(main, text = "Subject_4: ").grid(row = 3, column = 0)
+Label(main, text = "Subject_5: ").grid(row = 4, column = 0)
+Label(main, text = "Subject_6: ").grid(row = 5, column = 0)
+
+Label(main, text = "Points: ").grid(row = 0, column = 2)
+Label(main, text = "Points: ").grid(row = 1, column = 2)
+Label(main, text = "Points: ").grid(row = 2, column = 2)
+Label(main, text = "Points: ").grid(row = 3, column = 2)
+Label(main, text = "Points: ").grid(row = 4, column = 2)
+Label(main, text = "Points: ").grid(row = 5, column = 2)
+
+Label(main, text = "Credits: ").grid(row = 0, column = 4)
+Label(main, text = "Credits: ").grid(row = 1, column = 4)
+Label(main, text = "Credits: ").grid(row = 2, column = 4)
+Label(main, text = "Credits: ").grid(row = 3, column = 4)
+Label(main, text = "Credits: ").grid(row = 4, column = 4)
+Label(main, text = "Credits: ").grid(row = 5, column = 4)
+
+Label(main, text = "").grid(row = 6, column = 2)
+Label(main, text = "GPA: ").grid(row = 7, column = 2)
+
+Subject_1 = Entry(main)
+Subject_2 = Entry(main)
+Subject_3 = Entry(main)
+Subject_4 = Entry(main)
+Subject_5 = Entry(main)
+Subject_6 = Entry(main)
+
+Entry_1 = Entry(main)
+Entry_2 = Entry(main)
+Entry_3 = Entry(main)
+Entry_4 = Entry(main)
+Entry_5 = Entry(main)
+Entry_6 = Entry(main)
+
+credits_1 = Entry(main)
+credits_2 = Entry(main)
+credits_3 = Entry(main)
+credits_4 = Entry(main)
+credits_5 = Entry(main)
+credits_6 = Entry(main)
+
+gpa_window = Entry(main)
+
+Subject_1.grid(row = 0, column = 1)
+Subject_2.grid(row = 1, column = 1)
+Subject_3.grid(row = 2, column = 1)
+Subject_4.grid(row = 3, column = 1)
+Subject_5.grid(row = 4, column = 1)
+Subject_6.grid(row = 5, column = 1)
+
+Entry_1.grid(row = 0, column = 3)
+Entry_2.grid(row = 1, column = 3)
+Entry_3.grid(row = 2, column = 3)
+Entry_4.grid(row = 3, column = 3)
+Entry_5.grid(row = 4, column = 3)
+Entry_6.grid(row = 5, column = 3)
+
+credits_1.grid(row = 0, column = 5)
+credits_2.grid(row = 1, column = 5)
+credits_3.grid(row = 2, column = 5)
+credits_4.grid(row = 3, column = 5)
+credits_5.grid(row = 4, column = 5)
+credits_6.grid(row = 5, column = 5)
+
+gpa_window.grid(row = 7, column = 3)
+
+Button(main, text = "Calculate", command = calculate).grid(row = 8, column = 3)
+
+mainloop()
