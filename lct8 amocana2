@@ -1,0 +1,64 @@
+import requests 
+import csv
+
+key_word = input("if you want to use lat/long shearch enter LOC. if you want to use  Name search enter NAME: ")
+
+f = csv.writer(open('monacemebi.csv', 'w'))
+f.writerow(['Place Name''Latitude','Longitude','Formatted Address'])
+
+URL = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBYhKDIAf-ofLgOorwxO8kt49L6xyRkbnk&"
+
+if key_word.upper() == 'NAME':
+
+  location = input("\nenter place name: ")
+    
+  PARAMS = {'address':location} 
+    
+  r = requests.get(url = URL, params = PARAMS) 
+
+  data = r.json() 
+
+  latitude = data['results'][0]['geometry']['location']['lat'] 
+  longitude = data['results'][0]['geometry']['location']['lng'] 
+  formatted_address = data['results'][0]['formatted_address']
+
+  print("\nLatitude: %s\nLongitude: %s\nFormatted Address: %s\n" %(latitude, longitude,formatted_address))
+  
+  csv_key = input('would you like to save info in csv file, if yes type YES if no type NO: ')
+
+  if csv_key.upper() == 'YES':
+    f.writerow([location,latitude,longitude,formatted_address])
+  elif csv_key.upper() == 'NO':
+    print('\nEnd of proccess')
+
+  else:
+    print('\nInvalid csv key')
+
+elif key_word.upper() == 'LOC':
+  latitude = input('\nenter latitude: ')
+  longitude = input('enter longitude: ')
+
+  PARAMS = {'latlng': '{} {}'.format(latitude,longitude)}
+
+  r = requests.get(url = URL, params = PARAMS)
+
+  data = r.json()
+
+
+  formatted_address = data['results'][0]['formatted_address']
+  place_name = data['results'][0]['address_components'][1].get('long_name')
+
+  print('\nPlace Name: %s\nFormatted Address: %s' %(place_name, formatted_address))
+
+  csv_key = input('would you like to save info in csv file, if yes type YES if no type NO: ')
+
+  if csv_key.upper() == 'YES':
+    f.writerow([place_name,latitude,longitude,formatted_address])
+  elif csv_key.upper() == 'NO':
+    print('\nEnd of proccess')
+
+  else:
+    print('\nInvalid csv key')
+
+else:
+  print('\ninvalid keyword')
