@@ -1,0 +1,29 @@
+from tkinter import *
+import time
+
+def save_file():
+    if Name.get() == "" and Surname.get() == "":
+        Blank.insert(0, "Invalid Entry")
+    else:
+        open("saved.txt", "a").write("{} {}\n".format(Name.get(), Surname.get()))
+        root.destroy()
+
+
+root = Tk()
+
+Label(root, text = "Enter Name").grid(row = 0)
+Label(root, text = "Enter Surname").grid(row = 1)
+
+Name = Entry(root)
+Surname = Entry(root)
+Blank = Entry(root)
+
+Name.grid(row = 0, column = 1)
+Surname.grid(row = 1, column = 1)
+Blank.grid(row = 2, column = 1)
+
+Button(root, text = "Save", command = save_file).grid(row = 5, column = 1)
+Button(root, text = "Quit", command = root.destroy).grid(row = 5, column = 2)
+
+mainloop()
+
