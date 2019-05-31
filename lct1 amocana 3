@@ -1,0 +1,32 @@
+def find_in(data,words):
+  new_str = ", ".join(data)
+  for a in "aeiouyAEIOUY":
+    if a in new_str:
+      print(a + ":",new_str.count(a))
+  for x in "BCDFGHJKLMNPQRSTVXWzbcdfghjklmnpqrstvwxz":
+    if x in new_str:
+      print(x + ":",new_str.count(x))
+  for i in words:
+    if new_str.count(i) > 0:
+      print("{}: {}".format(i, new_str.count(i)))
+
+
+def main():
+  count = 0
+  data = []
+  while count != 3:
+    raw = input("enter three phrases: ")
+    data.append(raw)
+    count += 1
+
+  another_count = 0
+  words = []
+  while another_count != 2:
+    wordy = input("enter key words: ")
+    words.append(wordy)
+    another_count += 1
+
+  find_in(data,words)
+
+main()
+
