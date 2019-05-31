@@ -1,0 +1,96 @@
+from battleship import Battleship
+from cargo_ship import Cargo_ship
+from submarine import Submarine
+import random as rd
+import time
+
+class Ocean(Battleship, Cargo_ship, Submarine):
+  enviroment = []
+  fleet1 = []
+  fleet2 = []
+  cargo_quantity = [10,9,17,21,33,6]
+
+
+  def __init__(self, current_direction, current, temperature):
+    self.curr_dir = current_direction
+    self.curr = current
+    self.temp = temperature
+
+    
+  def adaptive_speed(self):
+
+    adapted_speed = self.speed - (self.weigth / 1000) - (self.quantity * self.quant_weigth) / 1000
+    return (adapted_speed)
+
+  def quantifier(fleet1, fleet2):
+    rand_ship = rd.choice(Ocean.fleet1)
+    Ocean.fleet2.remove(rand_ship)
+
+  def sailing(cargo_ship, distance):
+    print("\033[1m \033[94m \nfrom A to B went 3 ships '{}', '{}' and '{}' with speeds: {} mph, {} mph and {} mph\ndistance to cover {} miles\n".format(cargo_ship.name, Ocean.fleet1[0].name, Ocean.fleet1[1].name, Ocean.adaptive_speed(cargo_ship), Ocean.adaptive_speed(Ocean.fleet1[0]), Ocean.adaptive_speed(Ocean.fleet1[1]), distance))
+
+
+  def sailing_speed(enviroment, cargo_ship):
+    the_speed = cargo_ship.speed
+
+    if enviroment.temp >= 15:
+      the_speed = cargo_ship.speed + 20
+    else:
+      the_speed = cargo_ship.speed - 10
+
+    if enviroment.curr_dir == 'north':
+      the_speed -= enviroment.curr
+    else:
+      the_speed += enviroment.curr
+
+    return the_speed
+
+
+  def attack(cargo_ship, distance, speed):
+    random_ship = rd.choice(Ocean.fleet1)
+
+    arsenal1 = ((random_ship.weapon_name +",") * random_ship.quantity).split(",")
+    arsenal1.remove(arsenal1[-1])
+
+    arsenal2 = ((Ocean.fleet2[0].weapon_name + ",") * Ocean.fleet2[0].quantity).split(",")
+    arsenal2.remove(arsenal2[-1])
+    
+    count = 0
+    while distance > 0:
+      count += 1
+      distance -= speed
+      print("\033[93mdistance is",distance,"miles")
+      if (rd.randrange(len(arsenal1))) % 2 == 0:
+        cargo_ship.life -= random_ship.dmg
+        print("\033[1m \033[94m {} is being attacked by {}, \033[91mdamage taken \033[91m{}, \033[92mlife left {}\n".format(cargo_ship.name, random_ship.name, random_ship.dmg, cargo_ship.life))
+        time.sleep(3)
+        if cargo_ship.life <= 1:
+          print(cargo_ship.name + ":","\033[1m \033[91m failed on mission!")
+          exit()
+      else:
+        print("\033[1m \033[94m {} is being attacked by {} but {} is missing fire\n".format(cargo_ship.name, random_ship.name, random_ship.name))
+        time.sleep(3)
+      if distance <= 0:
+        print(cargo_ship.name + ":","\033[1m \033[92m succided on mission!")
+      if count == 3 and speed < Ocean.adaptive_speed(cargo_ship):
+        print("\033[91m Ocean currents are fighting with",cargo_ship.name,"speed has changed to",speed, "mph, distance to final destination is",distance,"mile, will",cargo_ship.name,"make it?\n")
+      if count == 3 and speed > Ocean.adaptive_speed(cargo_ship):
+        print("\033[92m Ocean currents are hellping",cargo_ship.name,"speed has changed to",speed,"mph\n")
+
+
+
+
+enviroment1 = Ocean('north', 40, -3)
+enviroment2 = Ocean('south', 50, 30)
+ship_car = Cargo_ship('cargo', 300, 90, 1000, 10, 40)
+ship_bat = Battleship('armagedon', 300, 110, 900, 10, 'Gun', 40, 35)
+ship_sub = Submarine('aquaman', 100, 120, 800, 5, 'torpedo', 70, 60)
+Ocean.fleet1.append(ship_bat)
+Ocean.fleet1.append(ship_sub)
+Ocean.fleet2.append(ship_bat)
+Ocean.fleet2.append(ship_sub)
+Ocean.enviroment.append(enviroment1)
+Ocean.enviroment.append(enviroment2)
+Ocean.quantifier(Ocean.fleet1, Ocean.fleet2)
+Ocean.sailing(ship_car, 1000)
+Ocean.attack(ship_car, 1000, Ocean.sailing_speed(rd.choice(Ocean.enviroment), ship_car))
