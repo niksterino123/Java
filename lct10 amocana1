@@ -1,0 +1,12 @@
+word = "lumberjacks"
+new_list = []
+
+for i in word:
+    if i not in new_list:
+        new_list.append(i)
+
+if len(word) > len(new_list):
+    print("word not isogram")
+
+else:
+    print("word is isogram")
