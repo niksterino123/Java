@@ -1,0 +1,15 @@
+import re
+
+class Pangram:
+    def __init__(self,pangram):
+        self.pangram = pangram
+
+    def check(self):
+        if len(set(re.findall("[a-z]", self.pangram.lower()))) == 26:
+            print("it is pangram")
+        else:
+            print("not pangram")
+
+pangram_1 = Pangram("The quick brown fox jumps over the lazy dog")
+pangram_1.check()
+
