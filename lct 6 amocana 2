@@ -1,0 +1,2 @@
+new_dict = {"vowels" : [v for v in open("sample.txt", "r").read().lower() if v in 'aeiouy'], "consonants" : [c for c in open("sample.txt", "r").read().lower() if c not in 'aeiouy']}
+print(new_dict)
