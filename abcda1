@@ -1,0 +1,112 @@
+import datetime
+
+class Database:
+  entries = []
+
+  def add(self, todo):
+    self.entries.append(todo)
+
+  def remove(self, ind):
+    index = self.entries.index(ind)
+    del self.entries[index]
+
+  def update(self, OldTodo, NewTodo):
+    i = self.entries.index(OldTodo)
+    self.entries[i] = NewTodo
+
+  def get_all(self):
+    return self.entries
+
+
+
+class Todo:
+
+  def __init__(self,text, deadline):
+    self.text = text
+    self.deadline = deadline
+    self.data = datetime.datetime.now()
+
+  def __str__(self):
+    return 'Data: ' + self.data.strftime('%d/%m/%Y %H:%M') + '\nTodo: ' + self.text + '\nDeadline: ' + self.deadline
+
+
+
+class Manager:
+
+  def __init__(self,datebase):
+    self.datebase = datebase
+
+  def add(self, todo):
+    self.datebase.add(todo)
+
+  def show_all(self):
+    entries = self.datebase.get_all()
+
+    for item in entries:
+      print('-' * 25 +  ' ' + str(entries.index(item) + 1) + ' ' + 25 * '-')
+      print(item)
+      print('-' * 52)
+
+  def update(self, old_todo, new_todo):
+    entries = self.datebase.update(old_todo, new_todo)
+
+  def delete(self, index):
+    entries = self.datebase.remove(index)
+
+def menu():
+  choice = None
+  database = Database()
+  manager = Manager(database)
+
+
+  while choice != 'q':
+    print('\nTo do list Menu')
+    print('a) Add')
+    print('e) Edit')
+    print('d) Delete')
+    print('s) Show all')
+    print('q) Quit')
+
+
+    choice = input('Action: ')
+    if choice == 'a':
+      text = input('To do: ')
+      deadline = input('Deadline: ')
+      todo = Todo(text, deadline)
+      manager.add(todo)
+
+    elif choice == 'e':
+      manager.show_all()
+      entries = database.get_all()
+      if len(entries) > 0:
+        try:  
+          index = int(input('sheiyvane ricxvi redaqtirebistvis: '))        
+        except IndexError:
+          print('arasworadaa sheyvanili')
+        else:
+          index = entries[index - 1]
+          text = input('To do:  ')
+          deadline = input('Deadline: ')
+          new_todo = Todo(text, deadline)
+          manager.update(index, new_todo)
+
+
+    elif choice == 'd':
+      manager.show_all()
+      entries = database.get_all()
+      if len(entries) > 0:
+        try:
+          index = int(input('sheiyvane ricxvi redaqtirebistvis:  '))
+          index = entries[index - 1]
+        except IndexError:
+          print('arasworadaa sheyvanili !!')
+        else:
+          manager.delete(index)
+    elif choice == 's':
+        manager.show_all()
+
+    else:
+        pass
+
+
+menu()
