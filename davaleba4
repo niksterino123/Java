@@ -1,0 +1,57 @@
+from tkinter import *
+import requests
+from bs4 import BeautifulSoup
+
+
+r = requests.get("https://www.nbg.gov.ge/index.php?m=582&lng=geo")
+c = r.content
+soup = BeautifulSoup(c, "html.parser")
+f = soup.find_all("div",{"id":"currency_id"})
+
+for item in f:
+  euro = item.find_all("td")[67].text.strip()
+  euro = float(euro)
+
+
+def convert_to_gel(event):
+    answer = entry1.get()
+    try:
+        label1["text"] = f'{answer} GEL: {round(int(answer)/euro,2)} EUR '
+    except:
+        label1["text"] = "gtxovt sheiyvanot ricxvi: "
+
+def convert_to_eur(event):   
+    answer = entry2.get()
+    try:
+        label2["text"] = f"{answer} EUR: {round(int(answer)*euro,2)} GEL"
+    except:
+        label2["text"] = "gtxovt sheiyvanot ricxvi: "
+
+
+window = Tk()
+
+info_gel = Label(window, text="GEL")
+info_gel.grid(row=0,column=0,)
+info_eur = Label(window, text="EUR")
+info_eur.grid(row=1,column=0)
+
+entry1 = Entry(window)
+entry1.grid(row=0,column=1)
+entry2 = Entry(window)
+entry2.grid(row=1,column=1)
+
+button1 = Button(window,text="Calculate")
+button1.grid(row=0,column=2)
+button2 = Button(window,text="Calculate")
+button2.grid(row=1,column=2)
+
+
+label1 = Label(window)
+label1.grid(row=0,column=3)
+label2 = Label(window)
+label2.grid(row=1,column=3)
+
+
+button1.bind("<Button-1>", convert_to_gel)
+button2.bind("<Button-1>", convert_to_eur)
+window.mainloop()
