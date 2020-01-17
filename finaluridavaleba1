@@ -1,0 +1,85 @@
+from tkinter import *
+
+def submit_form():
+
+    program = program_entry.get()
+    math = Math_Entry.get()
+    phizic = phizic_Entry.get()
+    art = Digital_art_Entry.get()
+    economic = economic_Entry.get()
+    business = business_Entry.get()
+
+
+    try:
+        program = int(program)
+        math = int(math)
+        phizic = int(phizic)
+        art = int(art)
+        economic = int(economic)
+        business = int(business)
+    except:
+        info_Label.configure(text=f"გთხოვ შეიყვანე ნორმალური მონაცემები", fg="red")
+
+    avg = (program+math+phizic+art+economic+business) / 6
+
+    if avg > 0 and avg <= 40:
+        info_Label.configure(text=f"F", fg="blue")
+    elif avg > 40 and avg <= 50:
+        info_Label.configure(text=f"Fx", fg="blue")
+    elif avg > 50 and avg <= 60:
+        info_Label.configure(text=f"E", fg="blue")
+    elif avg > 60 and avg <= 70:
+        info_Label.configure(text=f"D", fg="blue")
+    elif avg > 70 and avg <= 80:
+        info_Label.configure(text=f"C", fg="blue")
+    elif avg > 80 and avg <= 90:
+        info_Label.configure(text=f"B", fg="blue")
+    elif avg > 90 and avg <= 100:
+        info_Label.configure(text=f"A", fg="blue")
+    else:
+        info_Label.configure(text=f"incorrect number input", fg="red")
+
+
+
+
+root = Tk()
+root.geometry("700x400")
+program = Label(root, text="programming")
+program_entry = Entry(root)
+
+Math = Label(root, text="Mathemathic")
+Math_Entry = Entry(root)
+
+phizic = Label(root, text="Phizic")
+phizic_Entry = Entry(root)
+
+Digital_art = Label(root, text=" Digital Art")
+Digital_art_Entry = Entry(root)
+
+economic = Label(root, text="Economic")
+economic_Entry = Entry(root)
+
+business = Label(root, text="Business")
+business_Entry = Entry(root)
+
+submit_button = Button(root, text="Submit", command=submit_form)
+
+info_Label = Label(root)
+
+program.pack()
+program_entry.pack()
+Math.pack()
+Math_Entry.pack()
+phizic.pack()
+phizic_Entry.pack()
+Digital_art.pack()
+Digital_art_Entry.pack()
+economic.pack()
+economic_Entry.pack()
+business.pack()
+business_Entry.pack()
+submit_button.pack()
+info_Label.pack()
+
+
+root.mainloop()
